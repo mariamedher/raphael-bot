@@ -1,0 +1,34 @@
+[
+  {
+    "type": "prefix",
+    "user": {
+      "tag": "ptazulderosa",
+      "id": "997573231286439976"
+    },
+    "command": "say",
+    "details": "bitch",
+    "timestamp": "2025-06-21T07:36:31.471Z"
+  },
+  {
+    "type": "prefix",
+    "user": {
+      "tag": "ptazulderosa",
+      "id": "997573231286439976",
+      "nickname": "ptazulderosa"
+    },
+    "command": "say",
+    "details": "im a whore",
+    "timestamp": "2025-06-21T07:39:50.399Z"
+  },
+  {
+    "type": "prefix",
+    "user": {
+      "tag": "ptazulderosa",
+      "id": "997573231286439976",
+      "nickname": "ptazulderosa"
+    },
+    "command": "say",
+    "details": "a",
+    "timestamp": "2025-06-21T07:43:46.628Z"
+  }
+]
