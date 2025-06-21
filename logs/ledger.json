@@ -30,5 +30,27 @@
     "command": "say",
     "details": "a",
     "timestamp": "2025-06-21T07:43:46.628Z"
+  },
+  {
+    "type": "prefix",
+    "user": {
+      "tag": "ptazulderosa",
+      "id": "997573231286439976",
+      "nickname": "ptazulderosa"
+    },
+    "command": "say",
+    "details": "pretty please",
+    "timestamp": "2025-06-21T09:56:09.867Z"
+  },
+  {
+    "type": "prefix",
+    "user": {
+      "tag": "ptazulderosa",
+      "id": "997573231286439976",
+      "nickname": "ptazulderosa"
+    },
+    "command": "say",
+    "details": "You got it queen -- slay✨ ✨ just hit me with /contract",
+    "timestamp": "2025-06-21T09:57:29.641Z"
   }
 ]

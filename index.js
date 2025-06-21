@@ -46,21 +46,37 @@ for (const file of commandFiles) {
 }
 // 🔁 Load Events
 const eventsPath = path.join(__dirname, 'Events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+function getAllJsFiles(dirPath, arrayOfFiles = []) {
+  const files = fs.readdirSync(dirPath);
+  for (const file of files) {
+    const fullPath = path.join(dirPath, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      getAllJsFiles(fullPath, arrayOfFiles);
+    } else if (file.endsWith('.js')) {
+      arrayOfFiles.push(fullPath);
+    }
+  }
+  return arrayOfFiles;
+}
+
+const eventFiles = getAllJsFiles(eventsPath);
 
 for (const file of eventFiles) {
-  const filePath = path.join(eventsPath, file);
-  const event = require(filePath);
-
-  if (event.name && typeof event.execute === 'function') {
-    if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args));
+  try {
+    const event = require(file);
+    if (event.name && typeof event.execute === 'function') {
+      if (event.once) {
+        client.once(event.name, (...args) => event.execute(...args));
+      } else {
+        client.on(event.name, (...args) => event.execute(...args));
+      }
+      console.log(`📡 Loaded event: ${event.name}`);
     } else {
-      client.on(event.name, (...args) => event.execute(...args));
+      console.warn(`⚠️ Skipped event file ${file} — missing "name" or "execute".`);
     }
-    console.log(`📡 Loaded event: ${event.name}`);
-  } else {
-    console.warn(`⚠️ Skipped event file ${file} — missing "name" or "execute".`);
+  } catch (err) {
+    console.error(`❌ Failed to load event from file ${file}:`, err);
   }
 }
 const prefix = '!'; // You can move this to .env if you want
