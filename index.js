@@ -2,8 +2,9 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
-
-
+console.log('👁️ RAPHAEL INDEX.JS EXECUTED ONCE');
+console.log('🕵️ Running from:', __dirname);
+console.log('🔑 Token prefix:', process.env.DISCORD_TOKEN.slice(0, 5));
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -61,15 +62,19 @@ function getAllJsFiles(dirPath, arrayOfFiles = []) {
 }
 
 const eventFiles = getAllJsFiles(eventsPath);
-
+console.log('🧪 Event files found:', eventFiles);
 for (const file of eventFiles) {
   try {
     const event = require(file);
     if (event.name && typeof event.execute === 'function') {
-      if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args));
-      } else {
-        client.on(event.name, (...args) => event.execute(...args));
+      const alreadyListening = client.listenerCount(event.name) > 0;
+
+      if (!alreadyListening) {
+        if (event.once) {
+          client.once(event.name, (...args) => event.execute(...args));
+        } else {
+          client.on(event.name, (...args) => event.execute(...args));
+        }
       }
       console.log(`📡 Loaded event: ${event.name}`);
     } else {
@@ -148,11 +153,6 @@ client.on(Events.MessageCreate, async message => {
 });
 
 
-// 🔔 Bot ready
-client.once(Events.ClientReady, () => {
-  console.log(`✅ Logged in as ${client.user.tag}. Bot is ready.`);
-});
-
 // 🚨 Fatal error catchers
 process.on('unhandledRejection', reason => {
   console.error('🔴 [UNHANDLED REJECTION]:', reason);
@@ -167,8 +167,4 @@ if (!process.env.DISCORD_TOKEN) {
   console.error('❌ DISCORD_TOKEN not found in .env. Bot cannot start.');
   process.exit(1);
 }
-
-console.log('🔐 Attempting login...');
-client.login(process.env.DISCORD_TOKEN).catch(err => {
-  console.error('❌ Discord login failed:', err);
-});
+client.login(process.env.DISCORD_TOKEN);

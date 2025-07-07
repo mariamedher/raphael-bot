@@ -16,10 +16,10 @@ module.exports = {
 
     const welcomeLines = [
       `✨ Another mortal appears... <@${member.id}>. I do hope you're more useful than the last.`,
-      `🕯️ <@${member.id}>, hm? I've smelled stronger souls rotting in oubliettes.`,
-      `💀 A fresh signature for the ledger... Welcome, <@${member.id}>. You *will* sign, won't you?`,
-      `👁️ Eyes forward, <@${member.id}>. You're already being judged.`,
-      `🖋️ <@${member.id}>, consider this your first mistake. Let’s see how many more you can rack up.`,
+      `<@${member.id}>, hm? I've smelled stronger souls rotting in oubliettes.`,
+      `A fresh signature for the ledger... Welcome, <@${member.id}>. You *will* sign, won't you?`,
+      `Eyes forward, <@${member.id}>. You're already being judged.`,
+      `<@${member.id}>, consider this your first mistake. Let’s see how many more you can rack up.`,
     ];
 
     const randomLine = welcomeLines[Math.floor(Math.random() * welcomeLines.length)];
